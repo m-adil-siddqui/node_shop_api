@@ -174,19 +174,44 @@ Store user profile
 
 exports.store_profile = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res, next) {
+    var _user;
+
     return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            // const _user = await models.User.findById(req);
-            console.log(req.params);
+            _context4.prev = 0;
+            _context4.next = 3;
+            return _models["default"].User.findById(req.query.uid);
 
-          case 1:
+          case 3:
+            _user = _context4.sent;
+            _user.fname = req.body.fname;
+            _user.lname = req.body.lname;
+            _user.phone_number = req.body.phone;
+            _user.address = req.body.address;
+
+            _user.save();
+
+            return _context4.abrupt("return", res.status(200).json({
+              "_message": "User profile successfully created.",
+              "_error": false
+            }));
+
+          case 12:
+            _context4.prev = 12;
+            _context4.t0 = _context4["catch"](0);
+            return _context4.abrupt("return", res.status(500).json({
+              "message": _context4.t0.message,
+              "_error": true
+            }));
+
+          case 15:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4);
+    }, _callee4, null, [[0, 12]]);
   }));
 
   return function (_x10, _x11, _x12) {

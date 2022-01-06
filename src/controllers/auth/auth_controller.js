@@ -79,8 +79,22 @@ Store user profile
 */
 
 exports.store_profile = async (req, res, next) => {
-    // const _user = await models.User.findById(req);
-    console.log(req.params)
+    try{
+        
+        const _user = await models.User.findById(req.query.uid);
+        _user.fname         = req.body.fname;
+        _user.lname         = req.body.lname;
+        _user.phone_number  = req.body.phone;
+        _user.address       = req.body.address;
+        _user.save();
+
+        return res.status(200).json({"_message": "User profile successfully created.", "_error": false});
+
+    }catch(err){
+        return res.status(500).json({"message": err.message, "_error": true});
+    }
+    
+    // console.log(req.query, req.body)
 
 }
 

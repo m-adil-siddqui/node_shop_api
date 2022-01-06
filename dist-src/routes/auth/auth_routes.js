@@ -18,6 +18,6 @@ var router = _express["default"].Router();
 router.post("/register", _auth_controller.registerUser);
 router.post("/login", _auth_controller.loginUser);
 router.get("/user_details", _auth_middleware.auth, _auth_controller.userDetails);
-router.get("/create/profile/:id", _auth_controller.store_profile);
+router.post("/create/profile", _auth_controller.store_profile);
 var _default = router;
 exports["default"] = _default;
