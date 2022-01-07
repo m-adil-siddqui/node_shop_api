@@ -7,7 +7,7 @@ import { auth } from "middlewares/auth_middleware";
 router.post(`/register`, registerUser);
 router.post(`/login`, loginUser);
 router.get(`/user_details`, auth, userDetails);
-router.post(`/create/profile`, store_profile);
+router.post(`/create/profile`, auth, store_profile);
 
 
 
