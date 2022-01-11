@@ -55,7 +55,7 @@ exports.loginUser = async (req, res, next) => {
                 "sldfsd0fas9df809as8f", {
                     expiresIn: "1h"
                 })
-            return res.status(200).json({"message" : "Logged in successfully", "_token" : _token, "_error" : false});
+            return res.status(200).json({"message" : "Logged in successfully", "token" : _token, "_error" : false});
         } else {
             return res.status(422).json({"message" : "Login credentials is wrong.", "_error" : true});
         }

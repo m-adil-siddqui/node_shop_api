@@ -102,7 +102,7 @@ exports.loginUser = /*#__PURE__*/function () {
             });
             return _context2.abrupt("return", res.status(200).json({
               "message": "Logged in successfully",
-              "_token": _token,
+              "token": _token,
               "_error": false
             }));
 
