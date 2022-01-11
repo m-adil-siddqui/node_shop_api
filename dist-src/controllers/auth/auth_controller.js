@@ -84,8 +84,8 @@ exports.loginUser = /*#__PURE__*/function () {
             }
 
             return _context2.abrupt("return", res.status(422).json({
-              msg: "Login credentials is wrong.",
-              "success": false
+              "message": "Login credentials is wrong.",
+              "_error": true
             }));
 
           case 6:
@@ -101,17 +101,15 @@ exports.loginUser = /*#__PURE__*/function () {
               expiresIn: "1h"
             });
             return _context2.abrupt("return", res.status(200).json({
-              "data": {
-                msg: "Logged in successfully",
-                "_token": _token,
-                "success": true
-              }
+              "message": "Logged in successfully",
+              "_token": _token,
+              "_error": false
             }));
 
           case 11:
             return _context2.abrupt("return", res.status(422).json({
-              msg: "Login credentials is wrong.",
-              "success": false
+              "message": "Login credentials is wrong.",
+              "_error": true
             }));
 
           case 12:
@@ -121,7 +119,10 @@ exports.loginUser = /*#__PURE__*/function () {
           case 14:
             _context2.prev = 14;
             _context2.t0 = _context2["catch"](0);
-            return _context2.abrupt("return", res.status(500).json("ERROR: ".concat(_context2.t0.message)));
+            return _context2.abrupt("return", res.status(500).json({
+              "message": _context2.t0.message,
+              "_error": true
+            }));
 
           case 17:
           case "end":

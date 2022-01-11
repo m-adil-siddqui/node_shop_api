@@ -44,7 +44,7 @@ exports.loginUser = async (req, res, next) => {
         const _user = await models.User.findOne({'email':req.body.email});
         if(!_user)
         {
-            return res.status(422).json({msg : "Login credentials is wrong.", "success" : false});
+            return res.status(422).json({"message" : "Login credentials is wrong.", "_error" : true});
         }
         
         if (bcrypt.compareSync(req.body.password, _user.password)) {
@@ -55,14 +55,14 @@ exports.loginUser = async (req, res, next) => {
                 "sldfsd0fas9df809as8f", {
                     expiresIn: "1h"
                 })
-            return res.status(200).json({"data":{msg : "Logged in successfully", "_token" : _token, "success" : true}});
+            return res.status(200).json({"message" : "Logged in successfully", "_token" : _token, "_error" : false});
         } else {
-            return res.status(422).json({msg : "Login credentials is wrong.", "success" : false});
+            return res.status(422).json({"message" : "Login credentials is wrong.", "_error" : true});
         }
 
     }catch(err)
     {
-        return res.status(500).json(`ERROR: ${err.message}`);
+        return res.status(500).json({"message": err.message, "_error": true});
     }
 }
 
