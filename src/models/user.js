@@ -3,12 +3,14 @@ import timestamps from 'mongoose-timestamp'
 import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
+    social_id           : {type:String},
     fname               : {type:String},
     lname               : {type:String},
     phone_number        : {type:String},
     address             : {type:String},
     email               : {type:String, required:true},
-    password            : {type:String, required:true},
+    password            : {type:String},
+    thumbnail           : {type:String},
     is_profile_complete : {type:Boolean, default:false}
 })
 
@@ -26,5 +28,6 @@ userSchema.plugin(timestamps,{
     'updatedAt' : 'updated_at'
 })
 const User = mongoose.model('User', userSchema);
+
 export default User;
 

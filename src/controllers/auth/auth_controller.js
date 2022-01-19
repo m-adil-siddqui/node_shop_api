@@ -81,7 +81,7 @@ Store user profile
 exports.store_profile = async (req, res, next) => {
     try{
         
-        const _user = await models.User.findById(req.query.uid);
+        const _user         = await models.User.findById(req.query.uid);
         _user.fname         = req.body.fname;
         _user.lname         = req.body.lname;
         _user.phone_number  = req.body.phone;
@@ -92,14 +92,24 @@ exports.store_profile = async (req, res, next) => {
 
     }catch(err){
         return res.status(500).json({"message": err.message, "_error": true});
-    }
-    
+    }    
     // console.log(req.query, req.body)
 
 }
 
+exports.google_social_auth = async (req, res, next) => {
+    req.session.user = req.user;
 
-
+    let _token = jwt.sign({
+        id        : req.user._id,
+        email     : req.user.email,
+    },
+    "sldfsd0fas9df809as8f", {
+        expiresIn: "1h"
+    })
+    return res.status(200).json({"message" : "Logged in successfully", "token" : _token, "_error" : false});
     
+}
+
 
 

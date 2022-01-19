@@ -14,6 +14,9 @@ var _mongooseTimestamp = _interopRequireDefault(require("mongoose-timestamp"));
 var _bcrypt = _interopRequireDefault(require("bcrypt"));
 
 var userSchema = new _mongoose["default"].Schema({
+  social_id: {
+    type: String
+  },
   fname: {
     type: String
   },
@@ -31,8 +34,10 @@ var userSchema = new _mongoose["default"].Schema({
     required: true
   },
   password: {
-    type: String,
-    required: true
+    type: String
+  },
+  thumbnail: {
+    type: String
   },
   is_profile_complete: {
     type: Boolean,

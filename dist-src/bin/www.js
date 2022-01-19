@@ -24,7 +24,7 @@ var debug = (0, _debug["default"])('onlinequiz:server');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '4400');
+var port = normalizePort(process.env.PORT || '3000');
 
 _app["default"].set('port', port);
 /**
@@ -45,7 +45,7 @@ var server = _http["default"].createServer(_app["default"]);
       switch (_context.prev = _context.next) {
         case 0:
           server.listen(port, function () {
-            console.log("Server is running on 4400 port >>>>>>>>>>>>>>>>>>>>>>>");
+            console.log("Server is running on 3000 port >>>>>>>>>>>>>>>>>>>>>>>");
           });
 
         case 1:

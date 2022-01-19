@@ -15,7 +15,7 @@ const debug = debugLib('onlinequiz:server');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '4400');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
@@ -31,7 +31,7 @@ var server = http.createServer(app);
 //  server.listen();
 
 conDb().then(async () => {
-server.listen(port, () => { console.log(`Server is running on 4400 port >>>>>>>>>>>>>>>>>>>>>>>`) });
+server.listen(port, () => { console.log(`Server is running on 3000 port >>>>>>>>>>>>>>>>>>>>>>>`) });
 }).catch((err) => {
 console.error(`ERROR OCCURED WHILE DATABASE CONNECTION IS ESTABLISHED >>>>>>>>> ${err}`)
 })

@@ -219,3 +219,37 @@ exports.store_profile = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
+
+exports.google_social_auth = /*#__PURE__*/function () {
+  var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res, next) {
+    var _token;
+
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            req.session.user = req.user;
+            _token = _jsonwebtoken["default"].sign({
+              id: req.user._id,
+              email: req.user.email
+            }, "sldfsd0fas9df809as8f", {
+              expiresIn: "1h"
+            });
+            return _context5.abrupt("return", res.status(200).json({
+              "message": "Logged in successfully",
+              "token": _token,
+              "_error": false
+            }));
+
+          case 3:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+
+  return function (_x13, _x14, _x15) {
+    return _ref5.apply(this, arguments);
+  };
+}();
