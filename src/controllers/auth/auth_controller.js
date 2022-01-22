@@ -99,7 +99,6 @@ exports.store_profile = async (req, res, next) => {
 
 exports.google_social_auth = async (req, res, next) => {
     req.session.user = req.user;
-
     let _token = jwt.sign({
         id        : req.user._id,
         email     : req.user.email,
@@ -109,6 +108,38 @@ exports.google_social_auth = async (req, res, next) => {
     })
     return res.status(200).json({"message" : "Logged in successfully", "token" : _token, "_error" : false});
     
+}
+
+
+
+exports.store_google_user = async (req, res, next) => {
+
+    try{
+
+        let _user = await models.User.findOne({social_id : req.body.id});
+        
+        if(!_user){
+            _user = await new models.User({
+                social_id  : req.body.id,
+                fname      : req.body.fullname,
+                email      : req.body.email, 
+                thumbnail  : req.body.photo
+            }).save()
+
+        }
+
+        let _token = jwt.sign({
+            id        : _user._id,
+            email     : _user.email,
+            },
+            "sldfsd0fas9df809as8f", {
+            expiresIn: "1h"
+        })
+
+        return res.status(200).json({"_error" : false, "message" : "Info for social user is successfully stored", "token" : _token});
+    }catch(err){
+        return res.status(500).json({"_error" : true, "message": err.message});
+    }
 }
 
 

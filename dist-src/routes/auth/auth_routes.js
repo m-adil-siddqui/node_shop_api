@@ -25,6 +25,8 @@ router.post("/create/profile", _auth_middleware.auth, _auth_controller.store_pro
 router.get("/google", _passport["default"].authenticate('google', {
   scope: ['email', 'profile']
 }));
-router.get("/google/redirect", _passport["default"].authenticate('google'), _auth_controller.google_social_auth);
+router.get("/google/redirect", _passport["default"].authenticate('google'), _auth_controller.google_social_auth); //store user details who is sign in with google
+
+router.post('/store_social_user', _auth_controller.store_google_user);
 var _default = router;
 exports["default"] = _default;

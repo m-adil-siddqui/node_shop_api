@@ -253,3 +253,70 @@ exports.google_social_auth = /*#__PURE__*/function () {
     return _ref5.apply(this, arguments);
   };
 }();
+
+exports.store_google_user = /*#__PURE__*/function () {
+  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res, next) {
+    var _user, _token;
+
+    return _regenerator["default"].wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.prev = 0;
+            _context6.next = 3;
+            return _models["default"].User.findOne({
+              social_id: req.body.id
+            });
+
+          case 3:
+            _user = _context6.sent;
+
+            if (_user) {
+              _context6.next = 8;
+              break;
+            }
+
+            _context6.next = 7;
+            return new _models["default"].User({
+              social_id: req.body.id,
+              fname: req.body.fullname,
+              email: req.body.email,
+              thumbnail: req.body.photo
+            }).save();
+
+          case 7:
+            _user = _context6.sent;
+
+          case 8:
+            _token = _jsonwebtoken["default"].sign({
+              id: _user._id,
+              email: _user.email
+            }, "sldfsd0fas9df809as8f", {
+              expiresIn: "1h"
+            });
+            return _context6.abrupt("return", res.status(200).json({
+              "_error": false,
+              "message": "Info for social user is successfully stored",
+              "token": _token
+            }));
+
+          case 12:
+            _context6.prev = 12;
+            _context6.t0 = _context6["catch"](0);
+            return _context6.abrupt("return", res.status(500).json({
+              "_error": true,
+              "message": _context6.t0.message
+            }));
+
+          case 15:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, null, [[0, 12]]);
+  }));
+
+  return function (_x16, _x17, _x18) {
+    return _ref6.apply(this, arguments);
+  };
+}();
