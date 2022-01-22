@@ -81,11 +81,12 @@ Store user profile
 exports.store_profile = async (req, res, next) => {
     try{
         
-        const _user         = await models.User.findById(req.query.uid);
-        _user.fname         = req.body.fname;
-        _user.lname         = req.body.lname;
-        _user.phone_number  = req.body.phone;
-        _user.address       = req.body.address;
+        const _user               = await models.User.findById(req.query.uid);
+        _user.fname               = req.body.fname;
+        _user.lname               = req.body.lname;
+        _user.phone_number        = req.body.phone;
+        _user.address             = req.body.address;
+        _user.is_profile_complete = true;
         _user.save();
 
         return res.status(200).json({"_message": "User profile successfully created.", "_error": false});
@@ -136,9 +137,19 @@ exports.store_google_user = async (req, res, next) => {
             expiresIn: "1h"
         })
 
-        return res.status(200).json({"_error" : false, "message" : "Info for social user is successfully stored", "token" : _token});
+        return res.status(200).json({
+
+            "_error"              : false,
+            "is_profile_complete" : is_profile_complete,
+            "token"               : _token,
+            "message"             : "Info for social user is successfully stored",
+
+        });
     }catch(err){
-        return res.status(500).json({"_error" : true, "message": err.message});
+        return res.status(500).json({
+            "_error"  : true,
+            "message" : err.message
+        });
     }
 }
 

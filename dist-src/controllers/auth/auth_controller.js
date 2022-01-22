@@ -191,6 +191,7 @@ exports.store_profile = /*#__PURE__*/function () {
             _user.lname = req.body.lname;
             _user.phone_number = req.body.phone;
             _user.address = req.body.address;
+            _user.is_profile_complete = true;
 
             _user.save();
 
@@ -199,20 +200,20 @@ exports.store_profile = /*#__PURE__*/function () {
               "_error": false
             }));
 
-          case 12:
-            _context4.prev = 12;
+          case 13:
+            _context4.prev = 13;
             _context4.t0 = _context4["catch"](0);
             return _context4.abrupt("return", res.status(500).json({
               "message": _context4.t0.message,
               "_error": true
             }));
 
-          case 15:
+          case 16:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[0, 12]]);
+    }, _callee4, null, [[0, 13]]);
   }));
 
   return function (_x10, _x11, _x12) {
@@ -296,8 +297,9 @@ exports.store_google_user = /*#__PURE__*/function () {
             });
             return _context6.abrupt("return", res.status(200).json({
               "_error": false,
-              "message": "Info for social user is successfully stored",
-              "token": _token
+              "is_profile_complete": is_profile_complete,
+              "token": _token,
+              "message": "Info for social user is successfully stored"
             }));
 
           case 12:
