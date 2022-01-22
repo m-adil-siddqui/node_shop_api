@@ -140,7 +140,7 @@ exports.store_google_user = async (req, res, next) => {
         return res.status(200).json({
 
             "_error"              : false,
-            "is_profile_complete" : is_profile_complete,
+            "is_profile_complete" : _user.is_profile_complete,
             "token"               : _token,
             "message"             : "Info for social user is successfully stored",
 
